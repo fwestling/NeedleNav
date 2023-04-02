@@ -10,7 +10,6 @@ import { DmcColour } from "./dmc.types";
 import DmcResultsColumn from "./features/dmc-table/DmcResultsColumn";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [colours, setColours] = useState<DmcColour[]>([]);
 
   return (
