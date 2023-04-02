@@ -12,7 +12,7 @@ const DmcResultsColumn = ({ colours }: Props) => {
         <DmcTableCell
           number={colour.dmc}
           colour={colour.hexCode}
-          name={`${colour.flossName}: ${colour.red} ${colour.blue} ${colour.green}`}
+          name={`${colour.flossName} (${colour.red}, ${colour.green}, ${colour.blue})`}
         />
       ))}
     </List>

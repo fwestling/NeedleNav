@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://fwestling.github.io/needlenav",
+  "homepage": "https://fwestling.github.io/NeedleNav/",
   "scripts": {
     "predeploy": "vite build",
     "deploy": "gh-pages -d dist",
