@@ -4,9 +4,9 @@ import colours from "./dmcColours.json";
 import React from "react";
 import DmcTableCell from "./DmcTableCell";
 
-type Props = { column: number };
+type Props = { column: number; highlight?: string; clearClicked?: () => void };
 
-const DmcTableColumn = ({ column }: Props) => {
+const DmcTableColumn = ({ column, highlight, clearClicked }: Props) => {
   const myColours = colours.filter((c) => c.column === column);
 
   return (
@@ -16,6 +16,8 @@ const DmcTableColumn = ({ column }: Props) => {
       </Typography>
       {myColours.map((colour) => (
         <DmcTableCell
+          onClick={!highlight ? undefined : clearClicked}
+          highlighted={colour.dmc === highlight}
           number={colour.dmc}
           colour={colour.hexCode}
           name={colour.flossName}
