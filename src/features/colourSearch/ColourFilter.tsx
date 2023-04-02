@@ -36,7 +36,9 @@ const ColourFilter = ({ onChange }: Props) => {
         value={redFilter}
         onChange={(e) =>
           setRedFilter(
-            e.target.value ? Number.parseInt(e.target.value) : undefined
+            e.target.value
+              ? Math.max(255, Math.min(0, Number.parseInt(e.target.value)))
+              : undefined
           )
         }
         type="number"
@@ -48,7 +50,9 @@ const ColourFilter = ({ onChange }: Props) => {
         value={greenFilter}
         onChange={(e) =>
           setGreenFilter(
-            e.target.value ? Number.parseInt(e.target.value) : undefined
+            e.target.value
+              ? Math.max(255, Math.min(0, Number.parseInt(e.target.value)))
+              : undefined
           )
         }
         type="number"
@@ -60,7 +64,9 @@ const ColourFilter = ({ onChange }: Props) => {
         value={blueFilter}
         onChange={(e) =>
           setBlueFilter(
-            e.target.value ? Number.parseInt(e.target.value) : undefined
+            e.target.value
+              ? Math.max(255, Math.min(0, Number.parseInt(e.target.value)))
+              : undefined
           )
         }
         type="number"
