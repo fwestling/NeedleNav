@@ -6,4 +6,5 @@ export type DmcColour = {
   red: number;
   green: number;
   blue: number;
+  owned?: boolean;
 };

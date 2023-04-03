@@ -15,6 +15,16 @@ import FormControl from "@mui/material/FormControl";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import dmcColours from "./features/dmc-table/dmcColours.json";
+import ownedColours from "./features/dmc-table/ownedColours.json";
+
+const ownedDmcColours = dmcColours
+  .filter(({ dmc }) => ownedColours.includes(dmc))
+  .map((c) => ({ ...c, owned: true })) as DmcColour[];
+
+const allDmcColours = dmcColours.map((c) => ({
+  ...c,
+  owned: ownedColours.includes(c.dmc),
+})) as DmcColour[];
 
 function App() {
   const [colours, setColours] = useState<DmcColour[]>([]);
@@ -22,6 +32,12 @@ function App() {
   const [clicked, setClicked] = useState<DmcColour | undefined>();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [showResults, setShowResults] = useState<boolean>(false);
+  const [showOwnedOnly, setShowOwnedOnly] = useState<boolean>(false);
+
+  const listOfColours = useMemo(
+    () => (showOwnedOnly ? ownedDmcColours : allDmcColours),
+    [showOwnedOnly]
+  );
 
   const theme = useMemo(
     () =>
@@ -60,6 +76,15 @@ function App() {
           label="Show results?"
           disabled={colours.length === 0}
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={showOwnedOnly}
+              onChange={(e, c) => setShowOwnedOnly(c)}
+            />
+          }
+          label="Show only owned threads?"
+        />
         <Box
           sx={{
             display: "flex",
@@ -82,113 +107,117 @@ function App() {
           {!!clicked ? (
             <DmcTableColumn
               reference={reference}
-              allColours={dmcColours}
+              allColours={listOfColours}
               column={clicked.column}
               highlight={clicked.dmc}
               clearClicked={() => setClicked(undefined)}
             />
           ) : colours.length && showResults ? (
-            <DmcResultsColumn colours={colours} setClicked={setClicked} />
+            <DmcResultsColumn
+              reference={reference}
+              colours={colours}
+              setClicked={setClicked}
+            />
           ) : (
             <Fragment>
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={1}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={2}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={3}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={4}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={5}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={6}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={7}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={8}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={9}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={10}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={11}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={12}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={13}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={14}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={15}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={16}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={17}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={18}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={19}
               />
               <DmcTableColumn
                 reference={reference}
-                allColours={dmcColours}
+                allColours={listOfColours}
                 column={20}
               />
             </Fragment>

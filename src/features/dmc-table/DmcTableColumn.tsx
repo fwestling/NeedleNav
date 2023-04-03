@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemText, Typography } from "@mui/material";
 
-import React from "react";
+import React, { useMemo } from "react";
 import DmcTableCell from "./DmcTableCell";
 import { DmcColour } from "../../dmc.types";
 
@@ -19,23 +19,26 @@ const DmcTableColumn = ({
   reference,
   clearClicked,
 }: Props) => {
+  const myColours = useMemo(
+    () => allColours.filter((c) => c.column === column),
+    [allColours, column]
+  );
   return (
     <List sx={{ margin: 1 }}>
       <Typography variant="h5" sx={{ marginBottom: 1 }}>
         {column}
       </Typography>
-      {allColours
-        .filter((c) => c.column === column)
-        .map((colour) => (
-          <DmcTableCell
-            reference={reference}
-            onClick={!highlight ? undefined : clearClicked}
-            highlighted={colour.dmc === highlight}
-            number={colour.dmc}
-            colour={colour.hexCode}
-            name={colour.flossName}
-          />
-        ))}
+      {myColours.map((colour) => (
+        <DmcTableCell
+          owned={colour.owned}
+          reference={reference}
+          onClick={!highlight ? undefined : clearClicked}
+          highlighted={colour.dmc === highlight}
+          number={colour.dmc}
+          colour={colour.hexCode}
+          name={colour.flossName}
+        />
+      ))}
     </List>
   );
 };
