@@ -5,8 +5,17 @@ import { DmcColour } from "../../dmc.types";
 import findNearestColours from "./findNearestColours";
 import { styled } from "@mui/material";
 
+function componentToHex(c: number) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r: number, g: number, b: number) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
 type Props = {
-  onChange: (colours: DmcColour[]) => void;
+  onChange: (colours: { reference: string; dmc: DmcColour[] } | null) => void;
 };
 
 const ColourFilter = ({ onChange }: Props) => {
@@ -20,12 +29,14 @@ const ColourFilter = ({ onChange }: Props) => {
       blueFilter !== undefined &&
       greenFilter !== undefined
     )
-      onChange(
-        findNearestColours(
+      onChange({
+        reference: rgbToHex(redFilter, greenFilter, blueFilter),
+        dmc: findNearestColours(
           { R: redFilter, G: greenFilter, B: blueFilter },
           10
-        ) as DmcColour[]
-      );
+        ) as DmcColour[],
+      });
+    else onChange(null);
   }, [redFilter, blueFilter, greenFilter]);
 
   return (

@@ -9,6 +9,7 @@ type Props = {
   name: string;
   number: string;
   highlighted?: boolean;
+  reference?: string;
   onClick?: () => void;
 };
 
@@ -18,6 +19,7 @@ const TableCell = ({
   number,
   highlighted = false,
   onClick,
+  reference,
 }: Props) => {
   return (
     <ListItem
@@ -25,7 +27,14 @@ const TableCell = ({
         backgroundColor: colour,
         minHeight: 80,
         minWidth: 240,
-        border: highlighted ? "2px solid black" : undefined,
+        borderStyle: highlighted || reference ? "solid" : undefined,
+        borderColor: !!reference
+          ? reference
+          : highlighted
+          ? "white"
+          : undefined,
+        borderWidth: highlighted ? "4px 8px" : !!reference ? "2px 4px" : 0,
+        margin: highlighted && reference ? 2 : 0,
       })}
     >
       <ListItemAvatar

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -11,11 +11,17 @@ import DmcResultsColumn from "./features/dmc-table/DmcResultsColumn";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import FormControl from "@mui/material/FormControl";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import dmcColours from "./features/dmc-table/dmcColours.json";
 
 function App() {
   const [colours, setColours] = useState<DmcColour[]>([]);
+  const [reference, setReference] = useState<string | undefined>();
   const [clicked, setClicked] = useState<DmcColour | undefined>();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   const theme = useMemo(
     () =>
@@ -32,65 +38,162 @@ function App() {
       <CssBaseline />
 
       <Stack sx={{ width: "100%", height: "100%" }}>
-        <ColourFilter onChange={setColours} />
-
-        {!!clicked ? (
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              height: "100%",
-              overflow: "auto",
-            }}
-          >
+        <ColourFilter
+          onChange={(payload) => {
+            if (payload === null) {
+              setColours([]);
+              setReference(undefined);
+            } else {
+              const { reference, dmc } = payload;
+              setColours(dmc);
+              setReference(reference);
+            }
+          }}
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={showResults}
+              onChange={(e, c) => setShowResults(c)}
+            />
+          }
+          label="Show results?"
+          disabled={colours.length === 0}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            height: "100%",
+            overflow: "auto",
+            position: "relative",
+          }}
+        >
+          {reference ? (
+            <Box
+              sx={{
+                height: "100%",
+                position: "relative",
+                width: "2rem",
+                backgroundColor: reference,
+              }}
+            />
+          ) : null}
+          {!!clicked ? (
             <DmcTableColumn
+              reference={reference}
+              allColours={dmcColours}
               column={clicked.column}
               highlight={clicked.dmc}
               clearClicked={() => setClicked(undefined)}
             />
-          </Box>
-        ) : colours.length ? (
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              height: "100%",
-              overflow: "auto",
-            }}
-          >
+          ) : colours.length && showResults ? (
             <DmcResultsColumn colours={colours} setClicked={setClicked} />
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              width: "100%",
-              height: "100%",
-              overflow: "auto",
-            }}
-          >
-            <DmcTableColumn column={1} />
-            <DmcTableColumn column={2} />
-            <DmcTableColumn column={3} />
-            <DmcTableColumn column={4} />
-            <DmcTableColumn column={5} />
-            <DmcTableColumn column={6} />
-            <DmcTableColumn column={7} />
-            <DmcTableColumn column={8} />
-            <DmcTableColumn column={9} />
-            <DmcTableColumn column={10} />
-            <DmcTableColumn column={11} />
-            <DmcTableColumn column={12} />
-            <DmcTableColumn column={13} />
-            <DmcTableColumn column={14} />
-            <DmcTableColumn column={15} />
-            <DmcTableColumn column={16} />
-            <DmcTableColumn column={17} />
-            <DmcTableColumn column={18} />
-            <DmcTableColumn column={19} />
-            <DmcTableColumn column={20} />
-          </Box>
-        )}
+          ) : (
+            <Fragment>
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={1}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={2}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={3}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={4}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={5}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={6}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={7}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={8}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={9}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={10}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={11}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={12}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={13}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={14}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={15}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={16}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={17}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={18}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={19}
+              />
+              <DmcTableColumn
+                reference={reference}
+                allColours={dmcColours}
+                column={20}
+              />
+            </Fragment>
+          )}
+        </Box>
       </Stack>
     </ThemeProvider>
   );
