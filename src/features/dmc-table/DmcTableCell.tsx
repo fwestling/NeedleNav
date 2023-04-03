@@ -73,7 +73,9 @@ const TableCell = ({
         //   <NotOwnedIcon />
         // </ListItemSecondaryAction>
         <ListItemSecondaryAction>
-          <OwnedIcon />
+          <OwnedIcon
+            sx={(theme) => ({ color: theme.palette.getContrastText(colour) })}
+          />
         </ListItemSecondaryAction>
       )}
     </ListItem>
