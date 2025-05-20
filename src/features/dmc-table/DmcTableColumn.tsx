@@ -10,6 +10,7 @@ type Props = {
   highlight?: string;
   clearClicked?: () => void;
   reference?: string;
+  numbersOnly?: boolean;
 };
 
 const DmcTableColumn = ({
@@ -18,6 +19,7 @@ const DmcTableColumn = ({
   highlight,
   reference,
   clearClicked,
+  numbersOnly,
 }: Props) => {
   const myColours = useMemo(
     () => allColours.filter((c) => c.column === column),
@@ -37,6 +39,7 @@ const DmcTableColumn = ({
           number={colour.dmc}
           colour={colour.hexCode}
           name={colour.flossName}
+          numbersOnly={numbersOnly}
         />
       ))}
     </List>

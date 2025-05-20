@@ -33,6 +33,7 @@ function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [showResults, setShowResults] = useState<boolean>(false);
   const [showOwnedOnly, setShowOwnedOnly] = useState<boolean>(false);
+  const [numbersOnly, setNumbersOnly] = useState<boolean>(false);
 
   const listOfColours = useMemo(
     () => (showOwnedOnly ? ownedDmcColours : allDmcColours),
@@ -85,6 +86,16 @@ function App() {
           }
           label="Show only owned threads?"
         />
+                <FormControlLabel
+          control={
+            <Checkbox
+              checked={numbersOnly}
+              onChange={(e, c) => setNumbersOnly(c)}
+            />
+          }
+          label="Numbers only?"
+        />
+
         <Box
           sx={{
             display: "flex",
@@ -106,6 +117,8 @@ function App() {
           ) : null}
           {!!clicked ? (
             <DmcTableColumn
+                          numbersOnly={numbersOnly}
+
               reference={reference}
               allColours={listOfColours}
               column={clicked.column}
@@ -117,105 +130,146 @@ function App() {
               reference={reference}
               colours={colours}
               setClicked={setClicked}
+              numbersOnly={numbersOnly}
             />
           ) : (
             <Fragment>
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={1}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={2}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={3}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={4}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={5}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={6}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={7}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={8}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={9}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={10}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={11}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={12}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={13}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={14}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={15}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={16}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={17}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={18}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={19}
               />
               <DmcTableColumn
+                            numbersOnly={numbersOnly}
+
                 reference={reference}
                 allColours={listOfColours}
                 column={20}

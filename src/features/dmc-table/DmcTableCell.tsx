@@ -15,6 +15,7 @@ type Props = {
   highlighted?: boolean;
   reference?: string;
   onClick?: () => void;
+  numbersOnly?: boolean;
 };
 
 const TableCell = ({
@@ -25,13 +26,14 @@ const TableCell = ({
   highlighted = false,
   onClick,
   reference,
+  numbersOnly,
 }: Props) => {
   return (
     <ListItem
       sx={(theme) => ({
         backgroundColor: colour,
-        minHeight: 80,
-        minWidth: 240,
+        minHeight: numbersOnly ? 40 : 80,
+        minWidth: numbersOnly ? 120 : 240,
         // borderStyle: highlighted || reference ? "solid" : undefined,
         // borderColor: !!reference
         //   ? reference
@@ -53,7 +55,7 @@ const TableCell = ({
           {number}
         </Avatar>
       </ListItemAvatar>
-      {onClick ? (
+      {numbersOnly ? null : onClick ? (
         <ListItemButton onClick={onClick}>
           <ListItemText
             sx={(theme) => ({ color: theme.palette.getContrastText(colour) })}

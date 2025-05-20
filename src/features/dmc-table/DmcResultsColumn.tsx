@@ -7,9 +7,10 @@ type Props = {
   colours: DmcColour[];
   reference?: string;
   setClicked: (col: DmcColour) => void;
+  numbersOnly?: boolean;
 };
 
-const DmcResultsColumn = ({ colours, setClicked, reference }: Props) => {
+const DmcResultsColumn = ({ colours, setClicked, reference, numbersOnly }: Props) => {
   return (
     <List sx={{ margin: 1 }}>
       {colours.map((colour) => (
@@ -20,6 +21,7 @@ const DmcResultsColumn = ({ colours, setClicked, reference }: Props) => {
           colour={colour.hexCode}
           name={`${colour.flossName} (${colour.red}, ${colour.green}, ${colour.blue})`}
           onClick={() => setClicked(colour)}
+          numbersOnly={numbersOnly}
         />
       ))}
     </List>
